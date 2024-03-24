@@ -1,0 +1,60 @@
+/* main content styles */
+/* set max width and center the content */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; /* add padding around the content */
+    font-family: Arial, sans-serif; /* use Arial font with fallback to sans-serif */
+}
+
+/* form styles */
+/* style for text input */
+.form-group-text {
+    margin-bottom: 20px; /* add space below the text input */
+    display: inline; /* make the text input inline with other elements */
+}
+
+/* style for radio button group */
+.form-group-radio {
+    margin-bottom: 20px; /* add space below the radio button group */
+    display: flex; /* display radio buttons in a flex container */
+    align-items: center; /* vertically align radio buttons */
+    gap: 10px; /* set gap between radio buttons */
+}
+
+/* style for labels */
+label {
+    display: block; /* display labels as block elements */
+    font-weight: bold; /* make labels bold */
+}
+
+/* style for text input and textarea */
+input[type="text"],
+textarea {
+    width: 100%; /* make text input and textarea full width */
+    padding: 10px; /* add padding inside text input and textarea */
+    border: 1px solid #ccc; /* add border with light gray color */
+    border-radius: 5px; /* add border radius */
+    font-size: 16px; /* set font size */
+}
+
+/* style for radio buttons */
+input[type="radio"] {
+    margin-right: 2px; /* add space between radio buttons */
+}
+
+/* style for submit button */
+button[type="submit"] {
+    padding: 10px 20px; /* add padding around the submit button */
+    background-color: #007bff; /* set background color */
+    color: #fff; /* set text color */
+    border: none; /* remove border */
+    border-radius: 5px; /* add border radius */
+    cursor: pointer; /* change cursor to pointer on hover */
+    font-size: 16px; /* set font size */
+}
+
+/* hover effect for submit button */
+button[type="submit"]:hover {
+    background-color: #00b327; /* change background color on hover */
+}

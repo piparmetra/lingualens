@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar - LinguaLens</title>
+    <!-- links to external stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <link rel="stylesheet" href="stylesheets/grammar.css">
+    <!-- links to external scripts -->
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+</head>
+<body>
+
+    <!-- main container for the site's navigation and logo, providing a consistent look across the site -->
+    <div class="navbar-container">
+    <header>
+        <!-- logo container that's centered on the page before the menu is toggled -->
+        <div class="logo-container centered" id="logoBefore">
+            <!-- link back to the home page wrapped around the site's logo and name -->
+            <a href="index.html" class="logo-link">
+                <!-- site logo image -->
+                <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                <!-- site name displayed next to the logo -->
+                <h1>LinguaLens</h1>
+            </a>
+        </div>
+
+        <!-- container for navigation links that aligns to the left after the menu is toggled -->
+        <div class="left-items" id="leftItems">
+            <!-- secondary logo container shown after the menu is toggled -->
+            <div class="logo-container">
+                <!-- link back to the home page wrapped around the logo image -->
+                <a href="index.html" class="logo-link">
+                    <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                </a>
+            </div>
+            <!-- navigation links for the site -->
+            <nav class="nav-links">
+                <!-- unordered list to hold navigation links -->
+                <ul>
+                    <!-- individual list items for each navigation link -->
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <!-- dropdown menu for grammar-related content -->
+                    <li class="dropdown">
+                        <!-- the trigger for the dropdown menu, navigates to grammar overview page -->
+                        <a href="grammar.html" class="dropdown-toggle">Grammar</a>
+                        <!-- container for dropdown menu items, hidden until the dropdown is triggered -->
+                        <ul class="dropdown-content">
+                            <!-- individual dropdown menu items for specific grammar topics -->
+                            <li><a href="verbs.html">Verbs</a></li>
+                            <li><a href="nouns.html">Nouns</a></li>
+                            <li><a href="adjectives-adverbs.html">Adjectives & Adverbs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- container for items aligned to the right side of the navbar -->
+        <div class="right-items">
+            <!-- registration button, initially hidden until menu is toggled -->
+            <button id="registerBtn" class="hidden">Register</button>
+            <!-- menu toggle button (hamburger menu icon), always visible -->
+            <span id="toggleMenu">&#9776;</span>
+        </div>
+    </header>
+</div>
+
+
+    <main class="grammar-container">
+        <section class="grammar-section">
+            <a href="verbs.html" class="grammar-link">
+                <img src="media/runner.jpg" alt="Verbs Section">
+                <p>Explore the dynamics of English verbs, their conjugations, and usage in different tenses.</p>
+                <button>Learn Verbs</button>
+            </a>
+        </section>
+
+        <section class="grammar-section">
+            <a href="nouns.html" class="grammar-link">
+                <img src="media/london.jpg" alt="Nouns Section">
+                <p>Discover the variety of nouns in English, including proper, common, countable, and uncountable nouns.</p>
+                <button>Learn Nouns</button>
+            </a>
+        </section>
+
+        <section class="grammar-section">
+            <a href="adjectives-adverbs.html" class="grammar-link">
+                <img src="media/angry.jpg" alt="Adjectives & Adverbs Section">
+                <p>Dive into the world of adjectives and adverbs to enrich your English vocabulary and expression.</p>
+                <button>Learn Adjectives & Adverbs</button>
+            </a>
+        </section>
+    </main>
+
+    <!-- footer begins, containing contact information, admin commands, and social media links -->
+    <footer>
+        <div class="footer-content">
+            <!-- section for admin-specific functionalities -->
+            <h4>admin only commands:</h4>
+            <!-- button to view saved entries, accessible only to admins -->
+            <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
+
+            <!-- popup modal for displaying saved entries -->
+            <div id="entriesPopup" class="popup">
+                <div class="popup-content">
+                    <!-- close button for the popup -->
+                    <span class="close">&times;</span>
+                    <!-- button to clear all saved entries from the database or local storage -->
+                    <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
+                    <h2>saved words</h2>
+                    <!-- table for dynamically displaying saved words and their details -->
+                    <table id="entriesTable">
+                        <thead>
+                        <tr>
+                            <th>word</th>
+                            <th>definition</th>
+                            <th>part of speech</th>
+                            <th>example sentence</th>
+                            <th>origin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                    <h2>registered users</h2>
+                    <!-- table for displaying registered users' information -->
+                    <table id="usersTable">
+                        <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>date of birth</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- about section providing information about lingualens -->
+            <div class="footer-section">
+                <h4>about lingualens</h4>
+                <p>lingualens is dedicated to providing insightful resources for language enthusiasts and learners.</p>
+            </div>
+            <!-- contact section with email and phone information -->
+            <div class="footer-section">
+                <h4>contact us</h4>
+                <p>email: contact@lingualens.com</p>
+                <p>phone: +123 456 7890</p>
+            </div>
+            <!-- social media links section -->
+            <div class="footer-section">
+                <h4>follow us</h4>
+                <!-- links to social media platforms -->
+                <p><a href="#">facebook</a></p>
+                <p><a href="#">twitter</a></p>
+                <p><a href="#">instagram</a></p>
+            </div>
+        </div>
+        <!-- footer note for assignment information -->
+        <p>ee417: assignment 1 by patriks jegurs</p>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbs - LinguaLens</title>
+    <!-- links to external stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <!-- links to external scripts -->
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+</head>
+<body>
+
+    <!-- main container for the site's navigation and logo, providing a consistent look across the site -->
+    <div class="navbar-container">
+    <header>
+        <!-- logo container that's centered on the page before the menu is toggled -->
+        <div class="logo-container centered" id="logoBefore">
+            <!-- link back to the home page wrapped around the site's logo and name -->
+            <a href="index.html" class="logo-link">
+                <!-- site logo image -->
+                <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                <!-- site name displayed next to the logo -->
+                <h1>LinguaLens</h1>
+            </a>
+        </div>
+
+        <!-- container for navigation links that aligns to the left after the menu is toggled -->
+        <div class="left-items" id="leftItems">
+            <!-- secondary logo container shown after the menu is toggled -->
+            <div class="logo-container">
+                <!-- link back to the home page wrapped around the logo image -->
+                <a href="index.html" class="logo-link">
+                    <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                </a>
+            </div>
+            <!-- navigation links for the site -->
+            <nav class="nav-links">
+                <!-- unordered list to hold navigation links -->
+                <ul>
+                    <!-- individual list items for each navigation link -->
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <!-- dropdown menu for grammar-related content -->
+                    <li class="dropdown">
+                        <!-- the trigger for the dropdown menu, navigates to grammar overview page -->
+                        <a href="grammar.html" class="dropdown-toggle">Grammar</a>
+                        <!-- container for dropdown menu items, hidden until the dropdown is triggered -->
+                        <ul class="dropdown-content">
+                            <!-- individual dropdown menu items for specific grammar topics -->
+                            <li><a href="verbs.html">Verbs</a></li>
+                            <li><a href="nouns.html">Nouns</a></li>
+                            <li><a href="adjectives-adverbs.html">Adjectives & Adverbs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- container for items aligned to the right side of the navbar -->
+        <div class="right-items">
+            <!-- registration button, initially hidden until menu is toggled -->
+            <button id="registerBtn" class="hidden">Register</button>
+            <!-- menu toggle button (hamburger menu icon), always visible -->
+            <span id="toggleMenu">&#9776;</span>
+        </div>
+    </header>
+</div>
+
+    <!-- Sidebar for verb learning tips -->
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Verb Learning Tips</h2>
+            <ul>
+                <li>Conjugation Practice: Regularly practice verb conjugations in different tenses for proficiency.</li>
+                <li>Contextual Learning: Learn verbs in phrases or sentences to better understand usage.</li>
+                <li>Irregular Verb Focus: Pay extra attention to irregular verbs due to their unique patterns.</li>
+                <li>Voice Recording: Improve pronunciation and fluency in verb usage through self-recording.</li>
+            </ul>
+            <img src="media/runner.jpg" alt="Runner" style="width: 400px; height: auto;">
+        </aside>
+
+        <!-- Main content area for verb tables -->
+        <main>
+            <section id="Verb Tables" class="mainsection">
+                <h2>English Verbs</h2>
+                <p>Verbs are action words describing activities. They are categorized into regular and irregular verbs.</p>
+                
+                <!-- Regular Verbs Section -->
+                <section>
+                    <h3>Regular Verbs</h3>
+                    <table>
+                        <tr>
+                            <th>Base Form</th>
+                            <th>Past Tense</th>
+                            <th>Past Participle</th>
+                        </tr>
+                        <tr><td>Walk</td><td>Walked</td><td>Walked</td></tr>
+                        <tr><td>Jump</td><td>Jumped</td><td>Jumped</td></tr>
+                        <tr><td>Play</td><td>Played</td><td>Played</td></tr>
+                        <tr><td>Read</td><td>Read</td><td>Read</td></tr>
+                        <tr><td>Sing</td><td>Sang</td><td>Sung</td></tr>
+                        <tr><td>Write</td><td>Wrote</td><td>Written</td></tr>
+                        <tr><td>Run</td><td>Ran</td><td>Run</td></tr>
+                        <tr><td>Speak</td><td>Spoke</td><td>Spoken</td></tr>
+                        <tr><td>Eat</td><td>Ate</td><td>Eaten</td></tr>
+                        <tr><td>Drink</td><td>Drank</td><td>Drunk</td></tr>
+                        <tr><td>Sleep</td><td>Slept</td><td>Slept</td></tr>
+                        <tr><td>Study</td><td>Studied</td><td>Studied</td></tr>
+                        <tr><td>Dance</td><td>Danced</td><td>Danced</td></tr>
+                        <tr><td>Smile</td><td>Smiled</td><td>Smiled</td></tr>
+                        <tr><td>Laugh</td><td>Laughed</td><td>Laughed</td></tr>
+                        <tr><td>Cry</td><td>Cried</td><td>Cried</td></tr>
+                        <tr><td>Paint</td><td>Painted</td><td>Painted</td></tr>
+                        <tr><td>Talk</td><td>Talked</td><td>Talked</td></tr>
+                        <tr><td>Drive</td><td>Drove</td><td>Driven</td></tr>
+                        <tr><td>Fly</td><td>Flew</td><td>Flown</td></tr>
+                        <tr><td>Build</td><td>Built</td><td>Built</td></tr>
+                        <tr><td>Fix</td><td>Fixed</td><td>Fixed</td></tr>
+                        <tr><td>Buy</td><td>Bought</td><td>Bought</td></tr>
+                        <tr><td>Win</td><td>Won</td><td>Won</td></tr>
+                        <tr><td>Teach</td><td>Taught</td><td>Taught</td></tr>
+                        <tr><td>Learn</td><td>Learned</td><td>Learned</td></tr>
+                        <tr><td>Forget</td><td>Forgot</td><td>Forgotten</td></tr>
+                        <tr><td>Remember</td><td>Remembered</td><td>Remembered</td></tr>
+                        <tr><td>Sing</td><td>Sang</td><td>Sung</td></tr>
+                        <tr><td>Think</td><td>Thought</td><td>Thought</td></tr>
+                        <tr><td>Do</td><td>Did</td><td>Done</td></tr>
+                    </table>
+                </section>
+
+                <!-- Irregular Verbs Section -->
+                <section>
+                    <h3>Irregular Verbs</h3>
+                    <table>
+                        <tr>
+                            <th>Base Form</th>
+                            <th>Past Tense</th>
+                            <th>Past Participle</th>
+                        </tr>
+                        <tr><td>Go</td><td>Went</td><td>Gone</td></tr>
+                        <tr><td>Take</td><td>Took</td><td>Taken</td></tr>
+                        <tr><td>See</td><td>Saw</td><td>Seen</td></tr>
+                        <tr><td>Get</td><td>Got</td><td>Gotten</td></tr>
+                        <tr><td>Speak</td><td>Spoke</td><td>Spoken</td></tr>
+                        <tr><td>Eat</td><td>Ate</td><td>Eaten</td></tr>
+                        <tr><td>Drink</td><td>Drank</td><td>Drunk</td></tr>
+                        <tr><td>Run</td><td>Ran</td><td>Run</td></tr>
+                        <tr><td>Write</td><td>Wrote</td><td>Written</td></tr>
+                        <tr><td>Break</td><td>Broke</td><td>Broken</td></tr>
+                        <tr><td>Choose</td><td>Chose</td><td>Chosen</td></tr>
+                        <tr><td>Drive</td><td>Drove</td><td>Driven</td></tr>
+                        <tr><td>Have</td><td>Had</td><td>Had</td></tr>
+                        <tr><td>Know</td><td>Knew</td><td>Known</td></tr>
+                        <tr><td>Leave</td><td>Left</td><td>Left</td></tr>
+                        <tr><td>Meet</td><td>Met</td><td>Met</td></tr>
+                        <tr><td>Sit</td><td>Sat</td><td>Sat</td></tr>
+                        <tr><td>Swim</td><td>Swam</td><td>Swum</td></tr>
+                        <tr><td>Take</td><td>Took</td><td>Taken</td></tr>
+                        <tr><td>Throw</td><td>Threw</td><td>Thrown</td></tr>
+                        <tr><td>Win</td><td>Won</td><td>Won</td></tr>
+                        <tr><td>Write</td><td>Wrote</td><td>Written</td></tr>
+                        <tr><td>Catch</td><td>Caught</td><td>Caught</td></tr>
+                        <tr><td>Draw</td><td>Drew</td><td>Drawn</td></tr>
+                        <tr><td>Fly</td><td>Flew</td><td>Flown</td></tr>
+                        <tr><td>Begin</td><td>Began</td><td>Begun</td></tr>
+                        <tr><td>Hold</td><td>Held</td><td>Held</td></tr>
+                        <tr><td>Go</td><td>Went</td><td>Gone</td></tr>
+                        <tr><td>Teach</td><td>Taught</td><td>Taught</td></tr>
+                        <tr><td>Read</td><td>Read</td><td>Read</td></tr>
+                        <tr><td>Buy</td><td>Bought</td><td>Bought</td></tr>
+                        <tr><td>Sing</td><td>Sang</td><td>Sung</td></tr>
+                        <tr><td>Think</td><td>Thought</td><td>Thought</td></tr>
+                        <tr><td>Do</td><td>Did</td><td>Done</td></tr>
+                        <tr><td>Run</td><td>Ran</td><td>Run</td></tr>
+                        <tr><td>Swim</td><td>Swam</td><td>Swum</td></tr>
+                        <tr><td>Sleep</td><td>Slept</td><td>Slept</td></tr>
+                        <tr><td>Study</td><td>Studied</td><td>Studied</td></tr>
+                        <tr><td>Dance</td><td>Danced</td><td>Danced</td></tr>
+                        <tr><td>Smile</td><td>Smiled</td><td>Smiled</td></tr>
+                        <tr><td>Laugh</td><td>Laughed</td><td>Laughed</td></tr>
+                        <tr><td>Cry</td><td>Cried</td><td>Cried</td></tr>
+                        <tr><td>Paint</td><td>Painted</td><td>Painted</td></tr>
+                        <tr><td>Talk</td><td>Talked</td><td>Talked</td></tr>
+                        <tr><td>Drive</td><td>Drove</td><td>Driven</td></tr>
+                        <tr><td>Fly</td><td>Flew</td><td>Flown</td></tr>
+                        <tr><td>Build</td><td>Built</td><td>Built</td></tr>
+                        <tr><td>Fix</td><td>Fixed</td><td>Fixed</td></tr>
+                    </table>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <!-- footer begins, containing contact information, admin commands, and social media links -->
+    <footer>
+        <div class="footer-content">
+            <!-- section for admin-specific functionalities -->
+            <h4>admin only commands:</h4>
+            <!-- button to view saved entries, accessible only to admins -->
+            <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
+
+            <!-- popup modal for displaying saved entries -->
+            <div id="entriesPopup" class="popup">
+                <div class="popup-content">
+                    <!-- close button for the popup -->
+                    <span class="close">&times;</span>
+                    <!-- button to clear all saved entries from the database or local storage -->
+                    <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
+                    <h2>saved words</h2>
+                    <!-- table for dynamically displaying saved words and their details -->
+                    <table id="entriesTable">
+                        <thead>
+                        <tr>
+                            <th>word</th>
+                            <th>definition</th>
+                            <th>part of speech</th>
+                            <th>example sentence</th>
+                            <th>origin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                    <h2>registered users</h2>
+                    <!-- table for displaying registered users' information -->
+                    <table id="usersTable">
+                        <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>date of birth</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- about section providing information about lingualens -->
+            <div class="footer-section">
+                <h4>about lingualens</h4>
+                <p>lingualens is dedicated to providing insightful resources for language enthusiasts and learners.</p>
+            </div>
+            <!-- contact section with email and phone information -->
+            <div class="footer-section">
+                <h4>contact us</h4>
+                <p>email: contact@lingualens.com</p>
+                <p>phone: +123 456 7890</p>
+            </div>
+            <!-- social media links section -->
+            <div class="footer-section">
+                <h4>follow us</h4>
+                <!-- links to social media platforms -->
+                <p><a href="#">facebook</a></p>
+                <p><a href="#">twitter</a></p>
+                <p><a href="#">instagram</a></p>
+            </div>
+        </div>
+        <!-- footer note for assignment information -->
+        <p>ee417: assignment 1 by patriks jegurs</p>
+    </footer>
+
+
+</body>
+    </html>

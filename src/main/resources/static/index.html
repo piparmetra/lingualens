@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- metadata for character set and responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- page title -->
+    <title>LinguaLens</title>
+    <!-- links to external stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <!-- links to external scripts -->
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+    <!-- in-page styling for button -->
+    <style>
+    .welcome button {
+        padding: 20px 30px; /* example of comprehensive in-line styling. add padding around the add new word button */
+        background-color: #007bff; /* set background color */
+        color: #fff; /* set text color */
+        border: none; /* remove border */
+        border-radius: 5px; /* add border radius */
+        cursor: pointer; /* change cursor to pointer on hover */
+        font-size: 16px; /* set font size */
+        transition: background-color 0.3s ease-in-out /* smooth transition for background color */
+    }
+    </style>
+
+</head>
+<body>
+
+    <!-- main container for the site's navigation and logo, providing a consistent look across the site -->
+    <div class="navbar-container">
+        <header>
+            <!-- logo container that's centered on the page before the menu is toggled -->
+            <div class="logo-container centered" id="logoBefore">
+                <!-- link back to the home page wrapped around the site's logo and name -->
+                <a href="index.html" class="logo-link">
+                    <!-- site logo image -->
+                    <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                    <!-- site name displayed next to the logo -->
+                    <h1>LinguaLens</h1>
+                </a>
+            </div>
+
+            <!-- container for navigation links that aligns to the left after the menu is toggled -->
+            <div class="left-items" id="leftItems">
+                <!-- secondary logo container shown after the menu is toggled -->
+                <div class="logo-container">
+                    <!-- link back to the home page wrapped around the logo image -->
+                    <a href="index.html" class="logo-link">
+                        <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                    </a>
+                </div>
+                <!-- navigation links for the site -->
+                <nav class="nav-links">
+                    <!-- unordered list to hold navigation links -->
+                    <ul>
+                        <!-- individual list items for each navigation link -->
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <!-- dropdown menu for grammar-related content -->
+                        <li class="dropdown">
+                            <!-- the trigger for the dropdown menu, navigates to grammar overview page -->
+                            <a href="grammar.html" class="dropdown-toggle">Grammar</a>
+                            <!-- container for dropdown menu items, hidden until the dropdown is triggered -->
+                            <ul class="dropdown-content">
+                                <!-- individual dropdown menu items for specific grammar topics -->
+                                <li><a href="verbs.html">Verbs</a></li>
+                                <li><a href="nouns.html">Nouns</a></li>
+                                <li><a href="adjectives-adverbs.html">Adjectives & Adverbs</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- container for items aligned to the right side of the navbar -->
+            <div class="right-items">
+                <!-- registration button, initially hidden until menu is toggled -->
+                <button id="registerBtn" class="hidden">Register</button>
+                <!-- menu toggle button (hamburger menu icon), always visible -->
+                <span id="toggleMenu">&#9776;</span>
+            </div>
+        </header>
+    </div>
+
+    <!-- main container for sidebar and content -->
+    <div class="container">
+        <!-- sidebar with language learning tips -->
+        <aside class="sidebar">
+            <h2>General Language Learning Tips</h2>
+            <ul>
+                <li>Practice Speaking with Native Speakers: Engage in regular conversations to enhance fluency.</li>
+                <li>Immerse Yourself in the Language: Use movies, music, books, and podcasts for immersion.</li>
+                <li>Use Language Learning Apps: For interactive and guided learning.</li>
+            </ul>
+            <!-- image for visual interest -->
+            <img src="media/librarian.jpg" width="400" height="auto" alt="Librarian">
+            <!-- additional tips -->
+            <ul>
+                <li>Engage in Language Exchanges: Find partners online or in your community.</li>
+            </ul>
+        </aside>
+        <!-- main content area -->
+        <main>
+            <!-- admin only welcome section. when login features are available, regular users will have a different welcome area -->
+            <section id="welcome" class="mainsection">
+                <h1>Welcome Back Patriks!</h1>
+                <h5>Site administrator commands available:</h5>
+                <section class="welcome"> <!-- for in-page styling on button-->
+                <button type="button" onclick="location.href='entry.html'" id="welcome button" onmouseover="this.style.backgroundColor='#005cbf'"  onmouseout="this.style.backgroundColor='#007bff'">Add new word to dictionary</button> <!-- in-page welcome class styled for button animations -->
+                </section>
+            </section>
+            <!-- word of the day section -->
+            <section id="word-of-the-day" class="mainsection">
+                <h1>Word of the Day:</h1>
+                <div class="word">
+                    <h1>Brevity</h1>
+                    <!-- audio control for pronunciation -->
+                    <audio controls>
+                        <source src="media/Brevity.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="definition">
+                    <h4>Definition:</h4>
+                    <p>Concise and exact use of words in writing or speech.</p>
+                </div>
+                <div class="example">
+                    <h4>Example Usage:</h4>
+                    <p>In an age of Twitter, brevity is essential when trying to convey a message in under 280 characters.</p>
+                </div>
+            </section>
+
+            <!-- featured articles section -->
+            <section id="featured-articles" class="mainsection">
+                <h2>Featured Articles</h2>
+                <!-- individual articles with links to more information -->
+                <div class="article">
+                    <h3>The Evolution of Language</h3>
+                    <p>Explore how languages have evolved over centuries and the factors influencing these changes.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Language Learning Techniques</h3>
+                    <p>Discover effective strategies to accelerate your language learning journey.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>The Power of Bilingualism</h3>
+                    <p>Understand the cognitive benefits of being bilingual in today's global society.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Language and Culture</h3>
+                    <p>Delve into the deep connections between language and cultural identity.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Linguistic Diversity</h3>
+                    <p>Explore the richness and variety of languages around the world.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Technological Impact on Language</h3>
+                    <p>Discover how technology is shaping the way we communicate and learn languages.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Language Acquisition in Children</h3>
+                    <p>Learn about the fascinating process of how children acquire language skills.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>History of Writing Systems</h3>
+                    <p>Trace the origins and development of various writing systems across cultures.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Neurolinguistics: The Brain and Language</h3>
+                    <p>Explore the relationship between language and the brain, and how they influence each other.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+                <div class="article">
+                    <h3>Sociolinguistics: Language in Society</h3>
+                    <p>Understand how language functions in social contexts and its role in societal dynamics.</p>
+                    <a href="registration.html">Read more</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- footer begins, containing contact information, admin commands, and social media links -->
+    <footer>
+        <div class="footer-content">
+            <!-- section for admin-specific functionalities -->
+            <h4>admin only commands:</h4>
+            <!-- button to view saved entries, accessible only to admins -->
+            <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
+
+            <!-- popup modal for displaying saved entries -->
+            <div id="entriesPopup" class="popup">
+                <div class="popup-content">
+                    <!-- close button for the popup -->
+                    <span class="close">&times;</span>
+                    <!-- button to clear all saved entries from the database or local storage -->
+                    <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
+                    <h2>saved words</h2>
+                    <!-- table for dynamically displaying saved words and their details -->
+                    <table id="entriesTable">
+                        <thead>
+                        <tr>
+                            <th>word</th>
+                            <th>definition</th>
+                            <th>part of speech</th>
+                            <th>example sentence</th>
+                            <th>origin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                    <h2>registered users</h2>
+                    <!-- table for displaying registered users' information -->
+                    <table id="usersTable">
+                        <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>date of birth</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- rows populated dynamically with javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- about section providing information about lingualens -->
+            <div class="footer-section">
+                <h4>about lingualens</h4>
+                <p>lingualens is dedicated to providing insightful resources for language enthusiasts and learners.</p>
+            </div>
+            <!-- contact section with email and phone information -->
+            <div class="footer-section">
+                <h4>contact us</h4>
+                <p>email: contact@lingualens.com</p>
+                <p>phone: +123 456 7890</p>
+            </div>
+            <!-- social media links section -->
+            <div class="footer-section">
+                <h4>follow us</h4>
+                <!-- links to social media platforms -->
+                <p><a href="#">facebook</a></p>
+                <p><a href="#">twitter</a></p>
+                <p><a href="#">instagram</a></p>
+            </div>
+        </div>
+        <!-- footer note for assignment information -->
+        <p>ee417: assignment 1 by patriks jegurs</p>
+    </footer>
+
+</body>
+</html>

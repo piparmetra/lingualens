@@ -1,0 +1,24 @@
+/* Video thumbnail hover effect */
+/* Smooth transition for transform and shadow on hover */
+.video-section iframe {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Slightly increase size and add shadow effect on hover */
+.video-section iframe:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Link hover effect */
+/* Smooth transition for color and font-size */
+.video-section a {
+    transition: color 0.3s ease, font-size 0.3s ease;
+    color: #000; /* Initial color */
+}
+
+/* Color change and font-size increase on hover */
+.video-section a:hover {
+    color: #4a90e2; /* Color change on hover */
+    font-size: 1.05em; /* Slightly increase font size */
+}

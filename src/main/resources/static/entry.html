@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Definition</title>
+    <!-- links to external stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <link rel="stylesheet" href="stylesheets/entry.css">
+    <!-- links to external scripts -->
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+    <script>
+        // wait for the document to be fully loaded before executing the script
+        document.addEventListener('DOMContentLoaded', function () {
+            // get the form element by its id
+            const entryForm = document.getElementById('entryForm');
+            // create a div element to serve as a container for the success message
+            const successMessageContainer = document.createElement('div');
+
+            // style the success message container
+            successMessageContainer.style.color = 'green'; // set text color to green
+            successMessageContainer.style.marginTop = '20px'; // add top margin for spacing
+            successMessageContainer.style.fontWeight = 'bold'; // make text bold
+            successMessageContainer.style.display = 'none'; // initially hide the container
+            // insert the message container directly after the form in the DOM
+            entryForm.parentNode.insertBefore(successMessageContainer, entryForm.nextSibling);
+
+            // define a function to handle form submission
+            function handleFormSubmit(event) {
+                event.preventDefault(); // prevent the form's default submission behavior
+
+                // get input elements by their id or name
+                const word = document.getElementById('word');
+                const definition = document.getElementById('definition');
+                const partOfSpeech = document.querySelector('input[name="partOfSpeech"]:checked');
+                const exampleSentence = document.getElementById('exampleSentence');
+                const origin = document.getElementById('origin');
+                let validationMessages = []; // array to hold validation messages
+
+                // reset styles for all input fields to default
+                [word, definition, exampleSentence, origin].forEach(field => {
+                    field.style.borderColor = ''; // remove any red border indicating error
+                });
+                // reset the color for part of speech radio button labels
+                document.querySelectorAll('input[name="partOfSpeech"]').forEach(radio => {
+                    radio.closest('div').style.color = '';
+                });
+
+                // custom validation logic
+                if (!word.value) {
+                    word.style.borderColor = 'red'; // highlight field with red border if empty
+                    validationMessages.push("word cannot be empty.");
+                } else if (/\s/.test(word.value)) {
+                    word.style.borderColor = 'red'; // highlight field if it contains spaces
+                    validationMessages.push("word must not contain spaces.");
+                }
+                if (!definition.value || definition.value.length < 5) {
+                    definition.style.borderColor = 'red'; // highlight field if definition is too short
+                    validationMessages.push("definition must be at least 5 characters long.");
+                }
+                if (!partOfSpeech) {
+                    // highlight all part of speech radio buttons if none is selected
+                    document.querySelectorAll('input[name="partOfSpeech"]').forEach(radio => {
+                        radio.closest('div').style.color = 'red';
+                    });
+                    validationMessages.push("please select a part of speech.");
+                }
+                if (!exampleSentence.value) {
+                    exampleSentence.style.borderColor = 'red'; // highlight field if example sentence is empty
+                    validationMessages.push("example sentence cannot be empty.");
+                }
+                if (!origin.value) {
+                    origin.style.borderColor = 'red'; // highlight field if origin is empty
+                    validationMessages.push("origin cannot be empty.");
+                }
+
+                // show alert with all validation messages if there are any
+                if (validationMessages.length > 0) {
+                    alert(validationMessages.join('\n'));
+                    return; // stop further execution if validation fails
+                }
+
+                // prepare form data for storage if all validations pass
+                const formData = {
+                    word: word.value.trim(),
+                    definition: definition.value.trim(),
+                    partOfSpeech: partOfSpeech ? partOfSpeech.value : '',
+                    exampleSentence: exampleSentence.value.trim(),
+                    origin: origin.value.trim()
+                };
+
+                // retrieve existing entries from local storage or initialize an empty array
+                let entries = JSON.parse(localStorage.getItem('entries') || '[]');
+                // add the new form data to the entries array
+                entries.push(formData);
+                // save the updated entries array back to local storage
+                localStorage.setItem('entries', JSON.stringify(entries));
+
+                // display success message
+                successMessageContainer.textContent = 'word added successfully!';
+                successMessageContainer.style.display = ''; // make the container visible
+
+                // hide the success message after 3 seconds
+                setTimeout(() => {
+                    successMessageContainer.style.display = 'none'; // hide the container again
+                }, 3000);
+
+                // reset the form fields
+                entryForm.reset();
+            }
+
+            // add an event listener for the form's submit event
+            entryForm.addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+
+
+</head>
+<body>
+
+    <!-- main container for the site's navigation and logo, providing a consistent look across the site -->
+    <div class="navbar-container">
+    <header>
+        <!-- logo container that's centered on the page before the menu is toggled -->
+        <div class="logo-container centered" id="logoBefore">
+            <!-- link back to the home page wrapped around the site's logo and name -->
+            <a href="index.html" class="logo-link">
+                <!-- site logo image -->
+                <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                <!-- site name displayed next to the logo -->
+                <h1>LinguaLens</h1>
+            </a>
+        </div>
+
+        <!-- container for navigation links that aligns to the left after the menu is toggled -->
+        <div class="left-items" id="leftItems">
+            <!-- secondary logo container shown after the menu is toggled -->
+            <div class="logo-container">
+                <!-- link back to the home page wrapped around the logo image -->
+                <a href="index.html" class="logo-link">
+                    <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                </a>
+            </div>
+            <!-- navigation links for the site -->
+            <nav class="nav-links">
+                <!-- unordered list to hold navigation links -->
+                <ul>
+                    <!-- individual list items for each navigation link -->
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <!-- dropdown menu for grammar-related content -->
+                    <li class="dropdown">
+                        <!-- the trigger for the dropdown menu, navigates to grammar overview page -->
+                        <a href="grammar.html" class="dropdown-toggle">Grammar</a>
+                        <!-- container for dropdown menu items, hidden until the dropdown is triggered -->
+                        <ul class="dropdown-content">
+                            <!-- individual dropdown menu items for specific grammar topics -->
+                            <li><a href="verbs.html">Verbs</a></li>
+                            <li><a href="nouns.html">Nouns</a></li>
+                            <li><a href="adjectives-adverbs.html">Adjectives & Adverbs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- container for items aligned to the right side of the navbar -->
+        <div class="right-items">
+            <!-- registration button, initially hidden until menu is toggled -->
+            <button id="registerBtn" class="hidden">Register</button>
+            <!-- menu toggle button (hamburger menu icon), always visible -->
+            <span id="toggleMenu">&#9776;</span>
+        </div>
+    </header>
+</div>
+
+
+    <!-- main content -->
+    <main>
+        <h1>Add New Word to Dictionary</h1>
+        
+        <!-- Word Entry Form -->
+        <form id="entryForm" action="#" method="post">
+            <div class="form-group-text">
+                <label for="word">Word:</label>
+                <input type="text" id="word" name="word" required>
+            </div>
+
+            <div class="form-group-text">
+                <label for="definition">Definition:</label>
+                <textarea id="definition" name="definition" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group-radio">
+                <label>Part of Speech:</label><br>
+                <input type="radio" id="noun" name="partOfSpeech" value="noun" required>
+                <label for="noun">Noun</label><br>
+                <input type="radio" id="verb" name="partOfSpeech" value="verb">
+                <label for="verb">Verb</label><br>
+                <input type="radio" id="adjective" name="partOfSpeech" value="adjective">
+                <label for="adjective">Adjective</label><br>
+                <input type="radio" id="adverb" name="partOfSpeech" value="adverb">
+                <label for="adverb">Adverb</label><br>
+            </div>
+
+            <div class="form-group-text">
+                <label for="exampleSentence">Example Sentence:</label>
+                <input type="text" id="exampleSentence" name="exampleSentence" required>
+            </div>
+
+            <div class="form-group-text">
+                <label for="origin">Origin of Word:</label>
+                <input type="text" id="origin" name="origin" required>
+            </div>
+
+            <button type="submit" style="margin-top: 20px;">Submit</button>
+
+
+        </form>
+    </main>
+
+    <!-- footer begins, containing contact information, admin commands, and social media links -->
+    <footer>
+    <div class="footer-content">
+        <!-- section for admin-specific functionalities -->
+        <h4>admin only commands:</h4>
+        <!-- button to view saved entries, accessible only to admins -->
+        <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
+
+        <!-- popup modal for displaying saved entries -->
+        <div id="entriesPopup" class="popup">
+            <div class="popup-content">
+                <!-- close button for the popup -->
+                <span class="close">&times;</span>
+                <!-- button to clear all saved entries from the database or local storage -->
+                <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
+                <h2>saved words</h2>
+                <!-- table for dynamically displaying saved words and their details -->
+                <table id="entriesTable">
+                    <thead>
+                    <tr>
+                        <th>word</th>
+                        <th>definition</th>
+                        <th>part of speech</th>
+                        <th>example sentence</th>
+                        <th>origin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- rows populated dynamically with javascript -->
+                    </tbody>
+                </table>
+                <h2>registered users</h2>
+                <!-- table for displaying registered users' information -->
+                <table id="usersTable">
+                    <thead>
+                    <tr>
+                        <th>username</th>
+                        <th>email</th>
+                        <th>phone</th>
+                        <th>date of birth</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- rows populated dynamically with javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- about section providing information about lingualens -->
+        <div class="footer-section">
+            <h4>about lingualens</h4>
+            <p>lingualens is dedicated to providing insightful resources for language enthusiasts and learners.</p>
+        </div>
+        <!-- contact section with email and phone information -->
+        <div class="footer-section">
+            <h4>contact us</h4>
+            <p>email: contact@lingualens.com</p>
+            <p>phone: +123 456 7890</p>
+        </div>
+        <!-- social media links section -->
+        <div class="footer-section">
+            <h4>follow us</h4>
+            <!-- links to social media platforms -->
+            <p><a href="#">facebook</a></p>
+            <p><a href="#">twitter</a></p>
+            <p><a href="#">instagram</a></p>
+        </div>
+    </div>
+    <!-- footer note for assignment information -->
+    <p>ee417: assignment 1 by patriks jegurs</p>
+</footer>
+
+
+</body>
+</html>

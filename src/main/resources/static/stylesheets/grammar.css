@@ -1,0 +1,49 @@
+/* container for the grammar sections */
+/* flexbox for alignment */
+.grammar-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px; /* add padding around the container */
+}
+
+/* styling for each grammar section */
+.grammar-section {
+    width: 30%; /* set width of each grammar section */
+    text-align: center; /* center-align the content */
+}
+
+/* style for images in grammar sections */
+.grammar-section img {
+    width: 100%; /* set image width to fill container */
+    height: auto; /* maintain aspect ratio */
+    border-radius: 10px; /* add border radius for rounded corners */
+}
+
+/* style for links in grammar sections */
+.grammar-link {
+    text-decoration: none; /* remove underline from links */
+    color: inherit; /* inherit text color */
+}
+
+/* button styling in grammar sections */
+.grammar-section button {
+    background-color: #4caf50; /* set button background color */
+    color: white; /* set button text color */
+    border: none; /* remove button border */
+    padding: 10px 20px; /* add padding */
+    margin-top: 10px; /* add space above button */
+    border-radius: 5px; /* add border radius */
+    cursor: pointer; /* change cursor to pointer */
+    font-size: 16px; /* set font size */
+}
+
+/* button hover effect */
+.grammar-section button:hover {
+    background-color: #367c39; /* darker background color on hover */
+}
+
+/* remove border from images in grammar sections */
+.grammar-section img {
+    border: none;
+}
+

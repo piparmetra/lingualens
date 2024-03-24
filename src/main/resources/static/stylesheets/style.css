@@ -1,0 +1,321 @@
+/* reset styles for cross-browser consistency */
+/* reset margin, padding, and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* full height for html and body for footer positioning */
+html, body {
+    height: 100%;
+}
+
+/* base font and layout for entire document */
+/* set font family, line height, and default text color */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* header layout with space between elements */
+/* flex layout for header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+}
+
+/* login form alignment and spacing */
+/* flex layout for login section */
+#login-section {
+    display: flex;
+    align-items: center;
+}
+
+/* form elements styling */
+/* flex layout for form elements */
+#login-section form {
+    display: flex;
+    gap: 10px;
+}
+
+/* input field styling */
+/* padding, border, and border-radius for input fields */
+#login-section input[type="text"],
+#login-section input[type="password"] {
+    padding: 5px;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+}
+
+/* button styling and hover effect */
+/* button styling, padding, border, background color, text color, and cursor */
+#login-section button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+}
+
+/* button hover effect */
+/* darker background color on hover */
+#login-section button:hover {
+    background-color: #4cae4c;
+}
+
+/* Base styles for navigation */
+nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    align-items: center;
+}
+
+nav ul li {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+}
+
+/* Hover effect for nav items */
+nav ul li a:hover {
+    background-color: #eaeaea;
+}
+
+/* border and padding for images */
+img {
+    border: 1px solid #000;
+    padding: 2px;
+}
+
+/* container layout for main content and sidebar */
+/* flex layout for container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    margin: 10px;
+}
+
+/* logo and header alignment */
+/* flex layout for logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* main section border and margin */
+/* border style, width, padding, and margin for main sections */
+.mainsection {
+    border-style: solid;
+    border-width: 2px;
+    padding: 20px;
+    margin: 40px;
+}
+
+/* main content padding */
+/* padding for main content */
+main {
+    padding: 20px;
+    flex: 1;
+}
+
+/* sidebar width, padding, and border */
+/* flex basis, padding, order, and border for sidebar */
+.sidebar {
+    flex-basis: 400px;
+    padding: 30px;
+    order: 2;
+    border-right: solid 1px lightgrey;
+    border-left: solid 1px lightgrey;
+}
+
+/* footer center alignment and padding */
+/* center alignment and padding for footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f4f4f4;
+}
+
+/* responsive design for smaller screens */
+/* responsive layout changes for smaller screens */
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        order: 1;
+        border-right: none;
+        border-left: none;
+        border-top: solid 1px lightgrey;
+        border-bottom: solid 1px lightgrey;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* video section margin */
+/* margin for video section */
+.video-section {
+    margin-bottom: 20px;
+}
+
+/* responsive video iframe settings */
+/* responsive settings for video iframe */
+.video-section iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    margin-bottom: 10px;
+}
+
+/* blockquote styling for quotes */
+/* italic font style, margin, padding, and border for blockquote */
+blockquote {
+    font-style: italic;
+    margin: 20px 0;
+    padding: 10px;
+    border-left: 5px solid #ccc;
+}
+
+/* global table styles for consistency */
+/* set table width and border-collapse */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* table header and data cell styling */
+/* border-bottom and padding for table headers and data cells */
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* distinct background for table headers */
+/* background color for table headers */
+th {
+    background-color: #f4f4f4;
+}
+
+/* logo alignment in the header */
+/* flex layout for logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* logo link styling to match overall theme */
+/* flex layout for logo link */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* logo image size and margin adjustment */
+/* height and margin for logo image */
+.logo-image {
+    height: 50px;
+    margin-right: 10px;
+}
+
+/* assignment 2 additions below */
+    /* popup style */
+
+    .popup {
+        display: none; /* hidden by default */
+        position: fixed; /* stay in place */
+        z-index: 1; /* sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* full width */
+        height: 100%; /* full height */
+        overflow: auto; /* enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* black with opacity */
+    }
+
+    .popup-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+/* Overlay Fullscreen Image Style */
+.image-overlay {
+    position: fixed; /* Cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
+    z-index: 1000; /* Make sure it's on top of other content */
+}
+
+.image-overlay img {
+    max-width: 80%; /* Limit the image size with some margin around */
+    max-height: 80%;
+    margin: auto; /* Further ensure image is centered in overlay */
+}
+
+.section .header span {
+    float: right;
+    cursor: pointer;
+    padding: 0 5px;
+}
+

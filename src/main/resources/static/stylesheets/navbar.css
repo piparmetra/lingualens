@@ -1,0 +1,156 @@
+/* core layout and styling for the navbar, making the header a flex container to align items horizontally */
+.navbar-container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 1;
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+}
+
+/* styles for centering the logo container within the navbar */
+.logo-container.centered {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ensures the logo link is displayed flexibly and aligned center without text decoration */
+.logo-container.centered .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* adds space between the logo image and the following text */
+.logo-container.centered .logo-image {
+    margin-right: 10px;
+}
+
+/* styles for left-aligned items, initially hidden */
+.left-items {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0s linear 0.5s;
+    position: absolute;
+    left: 20px;
+    width: 100%;
+}
+
+/* styles for logo container links */
+.logo-container a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+/* margin right for images within logo containers */
+.logo-container img {
+    margin-right: 10px;
+}
+
+/* styles for the register button, initially hidden */
+#registerBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s ease 0.5s;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* styling for navigation links */
+.nav-links {
+    display: flex;
+    margin-left: 20px;
+}
+
+/* opacity for list items within navigation links */
+.nav-links li {
+    padding: 0 10px;
+    opacity: 1;
+}
+
+/* color for anchor tags within navigation links */
+.nav-links a {
+    color: #000;
+}
+
+/* styles for dropdown content, hidden by default */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0;
+    top: 100%;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    width: auto; /* Adjust as needed, or use 'auto' for content width */
+}
+
+/* display dropdown content on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* adds a downward arrow indicator next to dropdown triggers */
+.dropdown-toggle::after {
+    content: "▼";
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* styles for right-aligned items in the navbar */
+.right-items {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+}
+
+/* styles for the register button when it's hidden */
+#registerBtn {
+    margin-right: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+/* styles for the toggle menu icon */
+#toggleMenu {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* helper classes for managing visibility of elements */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.shown {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0s linear 0s;
+}
