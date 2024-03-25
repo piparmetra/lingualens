@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Entries</title>
+    <!-- Include necessary CSS stylesheets here -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/navbar.css">
+    <link rel="stylesheet" href="stylesheets/data.css">
+    <style>
+        /* Define CSS styles for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            z-index: 9999;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Style for the close button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- main container for the site's navigation and logo, providing a consistent look across the site -->
+<div class="navbar-container">
+    <header>
+        <!-- logo container that's centered on the page before the menu is toggled -->
+        <div class="logo-container centered" id="logoBefore">
+            <!-- link back to the home page wrapped around the site's logo and name -->
+            <a href="index.html" class="logo-link">
+                <!-- site logo image -->
+                <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                <!-- site name displayed next to the logo -->
+                <h1>LinguaLens</h1>
+            </a>
+        </div>
+
+        <!-- container for navigation links that aligns to the left after the menu is toggled -->
+        <div class="left-items" id="leftItems">
+            <!-- secondary logo container shown after the menu is toggled -->
+            <div class="logo-container">
+                <!-- link back to the home page wrapped around the logo image -->
+                <a href="index.html" class="logo-link">
+                    <img src="media/book.png" alt="Book Icon" class="logo-image" style="border:none;">
+                </a>
+            </div>
+            <!-- navigation links for the site -->
+            <nav class="nav-links">
+                <!-- unordered list to hold navigation links -->
+                <ul>
+                    <!-- individual list items for each navigation link -->
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <!-- dropdown menu for grammar-related content -->
+                    <li class="dropdown">
+                        <!-- the trigger for the dropdown menu, navigates to grammar overview page -->
+                        <a href="grammar.html" class="dropdown-toggle">Grammar</a>
+                        <!-- container for dropdown menu items, hidden until the dropdown is triggered -->
+                        <ul class="dropdown-content">
+                            <!-- individual dropdown menu items for specific grammar topics -->
+                            <li><a href="verbs.html">Verbs</a></li>
+                            <li><a href="nouns.html">Nouns</a></li>
+                            <li><a href="adjectives-adverbs.html">Adjectives & Adverbs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- container for items aligned to the right side of the navbar -->
+        <div class="right-items">
+            <!-- registration button, initially hidden until menu is toggled -->
+            <button id="registerBtn" class="hidden">Register</button>
+            <!-- menu toggle button (hamburger menu icon), always visible -->
+            <span id="toggleMenu">&#9776;</span>
+        </div>
+    </header>
+</div>
+
+<!-- main content -->
+<main>
+    <section id="word-entries" class="mainsection">
+        <h2>Word Entries</h2>
+        <!-- Table for displaying word entries -->
+        <table id="word-table">
+            <thead>
+            <tr>
+                <th>Word</th>
+                <th>Definition</th>
+                <th>User ID</th> <!-- Displaying user information -->
+                <th>Action</th> <!-- Button for showing user -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Table rows will be populated dynamically with JavaScript -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Popup to display user information -->
+<div id="user-popup" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h3>User Information</h3>
+    <div id="user-info"></div>
+</div>
+
+<!-- Include necessary JavaScript code here -->
+<script src="script.js"></script>
+<script src="navbar.js"></script>
+<script>
+    // Function to fetch user information based on user ID
+    function fetchUser(userId) {
+        // Make a fetch request to your backend API to get user information
+        fetch('users.json')
+            .then(response => response.json())
+            .then(users => {
+                const user = users.find(user => user.id === userId);
+                if (user) {
+                    // Display user information in the popup
+                    document.getElementById('user-info').innerHTML = `
+                        <p><strong>Username:</strong> ${user.username}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Phone:</strong> ${user.phone}</p>
+                        <p><strong>Date of Birth:</strong> ${new Date(user.dob).toLocaleDateString()}</p>
+                    `;
+                    // Show the popup
+                    document.getElementById('user-popup').style.display = 'block';
+                } else {
+                    alert('User not found.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user:', error);
+                alert('An error occurred while fetching user information.');
+            });
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById('user-popup').style.display = 'none';
+    }
+
+    // Function to populate word entries in the table
+    function populateWordEntries() {
+        fetch('entries.json')
+            .then(response => response.json())
+            .then(entries => {
+                const tableBody = document.querySelector('#word-table tbody');
+                tableBody.innerHTML = ''; // Clear existing rows
+                entries.forEach(entry => {
+                    // Create a new table row for each entry
+                    const row = document.createElement('tr');
+                    // Populate table cells with entry data
+                    row.innerHTML = `
+                        <td>${entry.word}</td>
+                        <td>${entry.definition}</td>
+                        <td>${entry.id}</td> <!-- Display user ID -->
+                        <td><button onclick="fetchUser(${entry.id})">Show User</button></td> <!-- Button to display user information -->
+                    `;
+                    // Append the row to the table body
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching word entries:', error);
+                alert('An error occurred while fetching word entries.');
+            });
+    }
+
+    // Call the populateWordEntries function when the page loads
+    document.addEventListener('DOMContentLoaded', populateWordEntries);
+
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById('user-popup').style.display = 'none';
+    }
+
+    // Call the closePopup function when clicking the close button
+    document.querySelector('.close').addEventListener('click', closePopup);
+
+
+
+</script>
+
+</body>
+</html>

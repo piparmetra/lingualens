@@ -1,0 +1,7 @@
+[
+  {"id": 1, "username": "JohnDoe", "email": "john.doe@example.com", "phone": "1234567890", "password": "password1", "dob": "1990-01-01T00:00:00.000+00:00"},
+  {"id": 2, "username": "JaneSmith", "email": "jane.smith@example.com", "phone": "1234567890", "password": "password2", "dob": "1992-05-15T00:00:00.000+00:00"},
+  {"id": 3, "username": "DavidBrown", "email": "david.brown@example.com", "phone": "1234567890", "password": "password3", "dob": "1985-11-30T00:00:00.000+00:00"},
+  {"id": 4, "username": "EmilyJohnson", "email": "emily.johnson@example.com", "phone": "1234567890", "password": "password4", "dob": "1988-09-20T00:00:00.000+00:00"},
+  {"id": 5, "username": "MichaelWilson", "email": "michael.wilson@example.com", "phone": "1234567890", "password": "password5", "dob": "1995-03-10T00:00:00.000+00:00"}
+]

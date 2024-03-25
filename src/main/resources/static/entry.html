@@ -12,78 +12,68 @@
     <script src="script.js"></script>
     <script src="navbar.js"></script>
     <script>
-        // wait for the document to be fully loaded before executing the script
-        document.addEventListener('DOMContentLoaded', function () {
-            // get the form element by its id
-            const entryForm = document.getElementById('entryForm');
-            // create a div element to serve as a container for the success message
+        // Script to handle form submission and validation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create success message container
             const successMessageContainer = document.createElement('div');
+            successMessageContainer.style.color = 'green';
+            successMessageContainer.style.marginTop = '20px';
+            successMessageContainer.style.fontWeight = 'bold';
+            successMessageContainer.style.display = 'none';
 
-            // style the success message container
-            successMessageContainer.style.color = 'green'; // set text color to green
-            successMessageContainer.style.marginTop = '20px'; // add top margin for spacing
-            successMessageContainer.style.fontWeight = 'bold'; // make text bold
-            successMessageContainer.style.display = 'none'; // initially hide the container
-            // insert the message container directly after the form in the DOM
+            // Insert success message container after the form
+            const entryForm = document.getElementById('entryForm');
             entryForm.parentNode.insertBefore(successMessageContainer, entryForm.nextSibling);
 
-            // define a function to handle form submission
-            function handleFormSubmit(event) {
-                event.preventDefault(); // prevent the form's default submission behavior
+            // Event listener for form submission
+            entryForm.addEventListener('submit', function(event) {
+                event.preventDefault();
 
-                // get input elements by their id or name
+                // Gather form data
                 const word = document.getElementById('word');
                 const definition = document.getElementById('definition');
                 const partOfSpeech = document.querySelector('input[name="partOfSpeech"]:checked');
                 const exampleSentence = document.getElementById('exampleSentence');
                 const origin = document.getElementById('origin');
-                let validationMessages = []; // array to hold validation messages
 
-                // reset styles for all input fields to default
-                [word, definition, exampleSentence, origin].forEach(field => {
-                    field.style.borderColor = ''; // remove any red border indicating error
-                });
-                // reset the color for part of speech radio button labels
-                document.querySelectorAll('input[name="partOfSpeech"]').forEach(radio => {
-                    radio.closest('div').style.color = '';
-                });
-
-                // custom validation logic
+                // Validate form inputs
+                let validationMessages = [];
                 if (!word.value) {
-                    word.style.borderColor = 'red'; // highlight field with red border if empty
-                    validationMessages.push("word cannot be empty.");
+                    validationMessages.push("Word cannot be empty.");
+                    word.style.borderColor = 'red';
                 } else if (/\s/.test(word.value)) {
-                    word.style.borderColor = 'red'; // highlight field if it contains spaces
-                    validationMessages.push("word must not contain spaces.");
+                    validationMessages.push("Word must not contain spaces.");
+                    word.style.borderColor = 'red';
                 }
                 if (!definition.value || definition.value.length < 5) {
-                    definition.style.borderColor = 'red'; // highlight field if definition is too short
-                    validationMessages.push("definition must be at least 5 characters long.");
+                    validationMessages.push("Definition must be at least 5 characters long.");
+                    definition.style.borderColor = 'red';
                 }
                 if (!partOfSpeech) {
-                    // highlight all part of speech radio buttons if none is selected
-                    document.querySelectorAll('input[name="partOfSpeech"]').forEach(radio => {
-                        radio.closest('div').style.color = 'red';
-                    });
-                    validationMessages.push("please select a part of speech.");
+                    validationMessages.push("Please select a part of speech.");
+                    // Additional code to visually indicate this error could be added here
                 }
                 if (!exampleSentence.value) {
-                    exampleSentence.style.borderColor = 'red'; // highlight field if example sentence is empty
-                    validationMessages.push("example sentence cannot be empty.");
+                    validationMessages.push("Example sentence cannot be empty.");
+                    exampleSentence.style.borderColor = 'red';
                 }
                 if (!origin.value) {
-                    origin.style.borderColor = 'red'; // highlight field if origin is empty
-                    validationMessages.push("origin cannot be empty.");
+                    validationMessages.push("Origin cannot be empty.");
+                    origin.style.borderColor = 'red';
                 }
 
-                // show alert with all validation messages if there are any
+                // Display validation messages or submit form
                 if (validationMessages.length > 0) {
                     alert(validationMessages.join('\n'));
-                    return; // stop further execution if validation fails
+                    return;
+                } else {
+                    // Reset the border colors if validation passes
+                    [word, definition, exampleSentence, origin].forEach(field => field.style.borderColor = '');
                 }
 
-                // prepare form data for storage if all validations pass
+                // Prepare form data for submission
                 const formData = {
+                    id: 1, // DEFAULT ID OF 1 AS NO LOGIN FUNCTIONALITY FOR ASSIGNMENT 3. FOR Q4
                     word: word.value.trim(),
                     definition: definition.value.trim(),
                     partOfSpeech: partOfSpeech ? partOfSpeech.value : '',
@@ -91,30 +81,34 @@
                     origin: origin.value.trim()
                 };
 
-                // retrieve existing entries from local storage or initialize an empty array
-                let entries = JSON.parse(localStorage.getItem('entries') || '[]');
-                // add the new form data to the entries array
-                entries.push(formData);
-                // save the updated entries array back to local storage
-                localStorage.setItem('entries', JSON.stringify(entries));
-
-                // display success message
-                successMessageContainer.textContent = 'word added successfully!';
-                successMessageContainer.style.display = ''; // make the container visible
-
-                // hide the success message after 3 seconds
-                setTimeout(() => {
-                    successMessageContainer.style.display = 'none'; // hide the container again
-                }, 3000);
-
-                // reset the form fields
-                entryForm.reset();
-            }
-
-            // add an event listener for the form's submit event
-            entryForm.addEventListener('submit', handleFormSubmit);
+                // Send form data to server
+                fetch('/api/submitEntry', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();  // Assume JSON response for successful requests
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Show success message and reset form
+                        successMessageContainer.style.display = 'block';
+                        successMessageContainer.innerText = data.message;
+                        entryForm.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Show error message
+                        alert('An error occurred while submitting the form.');
+                    });
+            });
         });
     </script>
+
 
 
 </head>
@@ -182,8 +176,8 @@
         <h1>Add New Word to Dictionary</h1>
         
         <!-- Word Entry Form -->
-        <form id="entryForm" action="#" method="post">
-            <div class="form-group-text">
+        <form id="entryForm">
+        <div class="form-group-text">
                 <label for="word">Word:</label>
                 <input type="text" id="word" name="word" required>
             </div>
@@ -224,51 +218,6 @@
     <!-- footer begins, containing contact information, admin commands, and social media links -->
     <footer>
     <div class="footer-content">
-        <!-- section for admin-specific functionalities -->
-        <h4>admin only commands:</h4>
-        <!-- button to view saved entries, accessible only to admins -->
-        <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
-
-        <!-- popup modal for displaying saved entries -->
-        <div id="entriesPopup" class="popup">
-            <div class="popup-content">
-                <!-- close button for the popup -->
-                <span class="close">&times;</span>
-                <!-- button to clear all saved entries from the database or local storage -->
-                <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
-                <h2>saved words</h2>
-                <!-- table for dynamically displaying saved words and their details -->
-                <table id="entriesTable">
-                    <thead>
-                    <tr>
-                        <th>word</th>
-                        <th>definition</th>
-                        <th>part of speech</th>
-                        <th>example sentence</th>
-                        <th>origin</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- rows populated dynamically with javascript -->
-                    </tbody>
-                </table>
-                <h2>registered users</h2>
-                <!-- table for displaying registered users' information -->
-                <table id="usersTable">
-                    <thead>
-                    <tr>
-                        <th>username</th>
-                        <th>email</th>
-                        <th>phone</th>
-                        <th>date of birth</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- rows populated dynamically with javascript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <!-- about section providing information about lingualens -->
         <div class="footer-section">

@@ -11,121 +11,104 @@
     <script src="script.js"></script>
     <script src="navbar.js"></script>
     <script>
-        // wait for the document to fully load before executing the code
+        // Script to handle form submission and validation
         document.addEventListener('DOMContentLoaded', function() {
-            // get references to the form and the div for displaying validation messages
+            // Get form and success message container
             const form = document.getElementById('registrationForm');
-            const validationMessagesDiv = document.getElementById('validationMessagesDiv');
+            const successMessageContainer = document.getElementById('successMessage');
 
-            // listen for the form submission event
+            // Event listener for form submission
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // prevent the form's default submit action
+                event.preventDefault();
 
-                // retrieve the values from the form inputs
+                // Get form fields
                 const username = document.getElementById('reg-username').value;
                 const email = document.getElementById('reg-email').value;
                 const password = document.getElementById('reg-password').value;
                 const repassword = document.getElementById('reg-repassword').value;
+                const dob = document.getElementById('reg-dob').value;
                 const phone = document.getElementById('reg-phone').value;
-                const dobInput = document.getElementById('reg-dob').value;
 
-                // initialize validation state and messages array
                 let valid = true;
                 let messages = [];
 
-                // retrieve existing registrations from local storage
-                const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-
-                // check for existing username, email, or phone in the registrations
-                const isUsernameTaken = registrations.some(reg => reg.username === username);
-                const isEmailTaken = registrations.some(reg => reg.email === email);
-                const isPhoneTaken = registrations.some(reg => reg.phone === phone.replace(/[\s-]/g, ''));
-
-                // validation for taken username
-                if (isUsernameTaken) {
+                // Detailed validation
+                if (!username) {
                     valid = false;
-                    messages.push('username is already taken. please choose a different one.');
+                    messages.push("Username cannot be empty.");
                 }
 
-                // regex pattern for username validation
-                const usernamePattern = /^[a-zA-Z0-9_-]{5,20}$/;
-                if (!usernamePattern.test(username)) {
+                if (!email) {
                     valid = false;
-                    messages.push('username must be 5-20 characters long and can include letters, numbers, underscores, and dashes.');
+                    messages.push("Email cannot be empty.");
+                } else if (!/\S+@\S+\.\S+/.test(email)) {
+                    valid = false;
+                    messages.push("Email address is invalid.");
                 }
 
-                // validation for taken email
-                if (isEmailTaken) {
+                if (!password) {
                     valid = false;
-                    messages.push('email is already in use. please use a different email address.');
+                    messages.push("Password cannot be empty.");
+                } else if (password !== repassword) {
+                    valid = false;
+                    messages.push("Passwords do not match.");
                 }
 
-                // validation for taken phone number
-                if (isPhoneTaken) {
+                if (!dob) {
                     valid = false;
-                    messages.push('phone number is already in use. please use a different phone number.');
+                    messages.push("Date of Birth cannot be empty.");
                 }
 
-                // simple email validation
-                if (!email.includes('@')) {
+                if (!phone) {
                     valid = false;
-                    messages.push('please enter a valid email address.');
+                    messages.push("Phone number cannot be empty.");
                 }
 
-                // password match validation
-                if (password !== repassword) {
-                    valid = false;
-                    messages.push('passwords do not match.');
-                }
-
-                // regex pattern for password validation
-                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                if (!passwordPattern.test(password)) {
-                    valid = false;
-                    messages.push('password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
-                }
-
-                // check if user is at least 18 years old
-                const dob = new Date(dobInput);
-                const today = new Date();
-                const minAge = 18;
-                const date18YearsAgo = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
-                if (dob > date18YearsAgo) {
-                    valid = false;
-                    messages.push('you must be at least 18 years old.');
-                }
-
-                // phone number validation after sanitizing dashes and spaces
-                const sanitizedPhone = phone.replace(/[\s-]/g, '');
-                const phonePattern = /^\d{10}$/;
-                if (!phonePattern.test(sanitizedPhone)) {
-                    valid = false;
-                    messages.push('please enter a valid phone number with 10 digits.');
-                }
-
-                // display validation messages if there are any
+                // Display validation messages
                 if (!valid) {
-                    validationMessagesDiv.innerHTML = messages.join('<br/>');
+                    document.getElementById('validationMessagesDiv').innerText = messages.join('\n');
                     return;
                 }
 
-                // save new registration details to local storage
-                registrations.push({
+                // Prepare form data for server submission
+                const formData = {
+                    id: 2, // DEFAULT ID OF 2 AS NO LOGIN FUNCTIONALITY FOR ASSIGNMENT 3. FOR Q4. IN NEXT ASSIGNMENT THIS WOULD BE UNIQUE FOR EACH USER.
                     username: username,
                     email: email,
-                    phone: sanitizedPhone,
                     password: password,
-                    dob: dob
-                });
-                localStorage.setItem('registrations', JSON.stringify(registrations));
+                    repassword: repassword,
+                    dob: dob,
+                    phone: phone
+                };
 
-                // clear the validation messages and notify the user of successful registration
-                validationMessagesDiv.innerHTML = '';
-                alert('registration successful!');
-                form.reset(); // reset the form fields
+                // Send data to server as JSON
+                fetch('/api/submitUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => {
+                        console.log('Response:', response);
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert('Registration successful');
+                        form.reset(); // reset form after successful submission
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('An error occurred while submitting the form.');
+                    });
+
             });
         });
     </script>
+
 
 </head>
 <body>
@@ -190,8 +173,8 @@
     <main class="registration-container" style="text-align: center; padding: 50px;">
         <h2 style="color: #4a90e2; margin-bottom: 30px;">Registration</h2>
         <div id="validationMessagesDiv" style="color: red; margin-bottom: 20px;"></div>
-        <form class="registration-form" autocomplete="off" id="registrationForm" style="max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
-            <label for="reg-username" style="display: block; margin-top: 20px; font-size: 18px;">Username:</label>
+        <form class="registration-form" autocomplete="off" id="registrationForm" >
+        <label for="reg-username" style="display: block; margin-top: 20px; font-size: 18px;">Username:</label>
             <input type="text" id="reg-username" name="username" placeholder="Choose a username" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px;" required>
 
             <label for="reg-email" style="display: block; margin-top: 20px; font-size: 18px;">Email:</label>
@@ -220,51 +203,7 @@
     <!-- footer begins, containing contact information, admin commands, and social media links -->
     <footer>
         <div class="footer-content">
-            <!-- section for admin-specific functionalities -->
-            <h4>admin only commands:</h4>
-            <!-- button to view saved entries, accessible only to admins -->
-            <button id="viewEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">view saved entries</button>
 
-            <!-- popup modal for displaying saved entries -->
-            <div id="entriesPopup" class="popup">
-                <div class="popup-content">
-                    <!-- close button for the popup -->
-                    <span class="close">&times;</span>
-                    <!-- button to clear all saved entries from the database or local storage -->
-                    <button id="clearEntriesBtn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">clear all entries</button>
-                    <h2>saved words</h2>
-                    <!-- table for dynamically displaying saved words and their details -->
-                    <table id="entriesTable">
-                        <thead>
-                        <tr>
-                            <th>word</th>
-                            <th>definition</th>
-                            <th>part of speech</th>
-                            <th>example sentence</th>
-                            <th>origin</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- rows populated dynamically with javascript -->
-                        </tbody>
-                    </table>
-                    <h2>registered users</h2>
-                    <!-- table for displaying registered users' information -->
-                    <table id="usersTable">
-                        <thead>
-                        <tr>
-                            <th>username</th>
-                            <th>email</th>
-                            <th>phone</th>
-                            <th>date of birth</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- rows populated dynamically with javascript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
             <!-- about section providing information about lingualens -->
             <div class="footer-section">
